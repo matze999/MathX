@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="test">
+      <UniqueIdentifier>{70a0103c-3c26-4924-abff-80338c1d9c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{d74ec578-46da-44b2-9bd9-6b9ca1aae97b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scanner">
+      <UniqueIdentifier>{4d3ab73a-433c-4f1c-819a-433069b29d80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="operator">
+      <UniqueIdentifier>{2db6b816-0620-4b12-8790-cba2e75d0baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="expression">
+      <UniqueIdentifier>{840bf338-0b1a-4a41-aa72-0358a842610c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="primitives">
+      <UniqueIdentifier>{457b033f-086d-4299-ad01-e8b94927ca6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{0228a527-4acc-4c5c-8604-7eee068836a7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\base\Attribute.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\Parser.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\expression\Backref.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\expression\Idle.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\expression\Rule.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\operator\Alternative.h">
+      <Filter>operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\operator\Exclude.h">
+      <Filter>operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\operator\Lazy.h">
+      <Filter>operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\operator\MakeParser.h">
+      <Filter>operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\operator\Repeat.h">
+      <Filter>operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\operator\Sequence.h">
+      <Filter>operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\primitive\Char.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\primitive\Charclass.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\primitive\Int.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\primitive\Literal.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\primitive\Word.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\scanner\Scanner.h">
+      <Filter>scanner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\scanner\SkipScanner.h">
+      <Filter>scanner</Filter>
+    </ClInclude>
+    <ClInclude Include="test_base.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="test_grammer.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="test_simple.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="test_wc.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Backref.h" />
+    <ClInclude Include="..\base\Base.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\expression\NoSkip.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\operator\List.h">
+      <Filter>operator</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonItem.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonParser.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonWriter.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="test_backref.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Parser.h" />
+    <ClInclude Include="..\..\common\ErrorInfo.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\numreader.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Range.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Reference.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Wrapper.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\RefParser.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Expressions.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\expression\Builder.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\stack.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\trace.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="test_expression.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\expression\Switch.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\FunctorParser.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\util.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\expression\Grammer.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\operator\Option.h">
+      <Filter>operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\primitive\Bool.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\primitive\ValueParser.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="test_operator.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\primitive\Primitive.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\trival.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\ActivityFlag.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\scanner\BaseScanner.h">
+      <Filter>scanner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\LogParser.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\operator\Not.h">
+      <Filter>operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\primitive\Phrase.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\StrUtils.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="calculator.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\expression\Map.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\primitive\StaticChar.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="test_charclass.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\expression\Operator.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Operator.h" />
+    <ClInclude Include="..\expression\Function.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="parser_test.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\todo.txt" />
+  </ItemGroup>
+</Project>

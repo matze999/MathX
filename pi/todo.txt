@@ -1,0 +1,163 @@
+
+- provide skip parser instance to the rule class
+- guard variable to parser
+
+
+
+man habe
+vetor  - collection
+string - name
+bool   - is_german
+
+
+coll_string =  if_(size(_1)) << string %  ","
+            | "no data";
+
+record = string  << ": " << coll_string;
+
+
+cout << record (name, collection);
+
+
+
+Rule<string> char_ % ","
+
+
+
+
+template <class T>
+struct  collection_string
+{
+   operator
+}
+
+
+template <class T = void_>
+struct Argument
+{
+   typedef  T type;
+   type  &value;
+};
+
+template <class Arg, class List = void_>
+struct ArgList
+{
+   typedef  Arg  Head;
+   typedef  List Tail;
+
+   Head  &head;
+   Tail  &tail;
+};
+
+
+template <int pos, class List>
+struct Argument
+{
+   typedef  Argument <pos-1, List::Tail>  Next;
+   typedef  Next::type  type;
+
+   type  operator() (List &list)
+   {
+      return  Next() (list.tail);
+   }
+}
+
+
+template <class T1, class T2, class T3, class T4>
+struct ArgList: std::tr1::function <signatur>
+{
+   typedef  T1 arg1_type;
+}
+
+
+
+
+
+template <class Char = void, char ...Args>
+struct  seq
+{
+	template <class Scanner>
+   static bool  match (Scanner& scanner, std::string& result) 
+   {
+      if (scanner.empty())  return false;
+		char ch = scanner.front();
+		if (!Char::match(ch))  return false;
+
+		result += ch;
+		scanner.pop_front();
+		return  seq <Args...>::match (scanner, result);
+   }
+};
+
+
+template <>
+struct  seq <>
+{
+	template <class Scanner>
+   static bool  match (Scanner& scanner, std::string& result) 
+   {
+		return  true;
+   }
+};
+
+
+
+template <class P, unsigned min, unsigned max = min>
+struct rep
+{
+	template <class Scanner, class Attribute>
+   static bool parse (Scanner &scanner, Attribute &attribute) 
+   {
+		for (uint pos = 0; pos < min; ++pos)
+		{
+			if (P::parse (scanner, attribute))
+				mp::assign (attribute, scanner.front());
+			else
+				return false;
+
+			scanner.pop_front();
+		}
+
+      if ( scanner.empty() || !T::match (scanner.front()) )
+			return false;
+
+		mp::assign (attribute, scanner.front());
+		scanner.pop_front();
+		return  rep <T, min-1, max-1>::parse (scanner, attribute);
+   }
+};
+
+
+template <class T, unsigned max>
+struct  rep <T, 0, max>
+{
+	template <class Scanner, class Attribute>
+   static bool parse (Scanner &scanner, Attribute &attribute) 
+   {
+		for (uint pos = 0; pos < max; ++pos)
+		{
+			if ( scanner.empty() || !T::match (scanner.front()) )
+				return true;
+
+			mp::assign (attribute, scanner.front());
+			scanner.pop_front();
+		}
+
+		if ( scanner.empty() || !T::match (scanner.front()) )
+			return true;
+
+		return false;
+   }
+};
+
+
+
+template <class T>
+using  opt = rep <T, 0, 1>;
+
+template <class T>
+using  star = rep <T, 0, 0xffffffff>;
+
+template <class T>
+using  plus = rep <T, 1, 0xffffffff>;
+

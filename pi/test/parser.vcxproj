@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common\ActivityFlag.h" />
+    <ClInclude Include="..\..\common\ErrorInfo.h" />
+    <ClInclude Include="..\..\common\Expressions.h" />
+    <ClInclude Include="..\..\common\numreader.h" />
+    <ClInclude Include="..\..\common\Range.h" />
+    <ClInclude Include="..\..\common\Reference.h" />
+    <ClInclude Include="..\..\common\stack.h" />
+    <ClInclude Include="..\..\common\StrUtils.h" />
+    <ClInclude Include="..\..\common\trace.h" />
+    <ClInclude Include="..\..\common\trival.h" />
+    <ClInclude Include="..\..\common\util.h" />
+    <ClInclude Include="..\..\common\Wrapper.h" />
+    <ClInclude Include="..\..\Parser.h" />
+    <ClInclude Include="..\Backref.h" />
+    <ClInclude Include="..\base\Attribute.h" />
+    <ClInclude Include="..\base\FunctorParser.h" />
+    <ClInclude Include="..\base\LogParser.h" />
+    <ClInclude Include="..\base\Parser.h" />
+    <ClInclude Include="..\base\Base.h" />
+    <ClInclude Include="..\base\RefParser.h" />
+    <ClInclude Include="..\expression\Backref.h" />
+    <ClInclude Include="..\expression\Builder.h" />
+    <ClInclude Include="..\expression\Function.h" />
+    <ClInclude Include="..\expression\Grammer.h" />
+    <ClInclude Include="..\expression\Idle.h" />
+    <ClInclude Include="..\expression\Map.h" />
+    <ClInclude Include="..\expression\NoSkip.h" />
+    <ClInclude Include="..\expression\Operator.h" />
+    <ClInclude Include="..\expression\Rule.h" />
+    <ClInclude Include="..\expression\Switch.h" />
+    <ClInclude Include="..\Operator.h" />
+    <ClInclude Include="..\operator\Alternative.h" />
+    <ClInclude Include="..\operator\Exclude.h" />
+    <ClInclude Include="..\operator\Lazy.h" />
+    <ClInclude Include="..\operator\List.h" />
+    <ClInclude Include="..\operator\MakeParser.h" />
+    <ClInclude Include="..\operator\Not.h" />
+    <ClInclude Include="..\operator\Option.h" />
+    <ClInclude Include="..\operator\Repeat.h" />
+    <ClInclude Include="..\operator\Sequence.h" />
+    <ClInclude Include="..\primitive\Bool.h" />
+    <ClInclude Include="..\primitive\Char.h" />
+    <ClInclude Include="..\primitive\Charclass.h" />
+    <ClInclude Include="..\primitive\Int.h" />
+    <ClInclude Include="..\primitive\Literal.h" />
+    <ClInclude Include="..\primitive\Phrase.h" />
+    <ClInclude Include="..\primitive\Primitive.h" />
+    <ClInclude Include="..\primitive\StaticChar.h" />
+    <ClInclude Include="..\primitive\ValueParser.h" />
+    <ClInclude Include="..\primitive\Word.h" />
+    <ClInclude Include="..\scanner\Scanner.h" />
+    <ClInclude Include="..\scanner\BaseScanner.h" />
+    <ClInclude Include="..\scanner\SkipScanner.h" />
+    <ClInclude Include="calculator.h" />
+    <ClInclude Include="JsonItem.h" />
+    <ClInclude Include="JsonParser.h" />
+    <ClInclude Include="JsonWriter.h" />
+    <ClInclude Include="test_backref.h" />
+    <ClInclude Include="test_base.h" />
+    <ClInclude Include="test_charclass.h" />
+    <ClInclude Include="test_expression.h" />
+    <ClInclude Include="test_grammer.h" />
+    <ClInclude Include="test_operator.h" />
+    <ClInclude Include="test_simple.h" />
+    <ClInclude Include="test_wc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\todo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="parser_test.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5DE310CC-1FA0-485C-ABC2-C636F800E2B8}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>parser</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>C:\home\Visual Studio\work\</OutDir>
+    <IntDir>C:\home\Visual Studio\work\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>C:\home\Visual Studio\work\$(Configuration)\</IntDir>
+    <OutDir>C:\home\Visual Studio\work\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\home\Visual Studio\mgo\common;C:\home\Visual Studio\mgo;C:\include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PreprocessToFile>false</PreprocessToFile>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Profile>true</Profile>
+    </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\home\Visual Studio\mgo\common;C:\home\Visual Studio\mgo;C:\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <Profile>true</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
