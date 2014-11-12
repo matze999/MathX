@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="mathX">
+      <UniqueIdentifier>{5447078d-3a13-4140-b6e3-7ad2798d844f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Number.h">
+      <Filter>mathX</Filter>
+    </ClInclude>
+    <ClInclude Include="NumberGeneratorTest.h" />
+    <ClInclude Include="..\NumberGenerator.h">
+      <Filter>mathX</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\NumberGenerator.cpp">
+      <Filter>mathX</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
