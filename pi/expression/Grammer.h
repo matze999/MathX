@@ -12,7 +12,7 @@ namespace _ {
 
 
 template <class T, class SkipParser>
-class grammer2_p
+class grammar_p
 {
 protected:
    typedef  pi::SkipScanner <SkipParser>   SkipScanner;
@@ -22,7 +22,7 @@ public:
 
    static const int  rank = PID::EXPRESSION;
 
-   grammer2_p (Rule0 &parser): start(parser)  {}
+   grammar_p (Rule0 &parser): start(parser)  {}
 
 
    template <class Scanner>
@@ -41,7 +41,7 @@ public:
 
    void toString (std::ostream &out, WRITEMODE level = WRITEMODE::COMPACT) const
    {
-      out << "Gramer <" << getTypeId(T) '>';
+      out << "Grammar <" << getTypeId(T) '>';
       //start->toString (out, level);
    }
 
@@ -60,16 +60,15 @@ private:
 
 
 template <class Base, class SkipParser = void>
-class  Grammer: public BaseParser <_::grammer2_p <Base, SkipParser>>
+class  Grammar: public BaseParser <_::grammar_p <Base, SkipParser>>
 {
    typedef  pi::SkipScanner <SkipParser>   SkipScanner;
    //typedef  pi::Rule <fn::no_action, SkipScanner>    Rule0;
 public:
-   typedef  Grammer  StartRule;
+   typedef  Grammar  StartRule;
 
 
-   Grammer (typename StartRule::Rule0& start)
-      : BaseParser <_::grammer2_p <Base, SkipParser>> (start)  {}
+   Grammar (typename StartRule::Rule0& start): Super (start)  {}
 
 
 //*** redefine Rule 

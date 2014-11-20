@@ -1,7 +1,7 @@
 #ifndef __MATHX_NUMBER_H
 #define __MATHX_NUMBER_H
 
-#include "NumberGenerator.h"
+#include "MathExpression.h"
 
 namespace mathX {
 
@@ -9,22 +9,25 @@ namespace mathX {
 
 
 template <class T>
-struct Number
+struct Number: public make_expression <Number<T>>
 {
-   Number ()  {}//: Super (Priority::NUMBER)  {}
+   Number (): Super (Priority::NUMBER)  {}
 
-   Number (T val)
+   Number (T val): Super (Priority::NUMBER)  
    {
       value = val;
+   }
+
+   Number&  operator= (T val)
+   {
+      value = val;
+      return *this;
    }
 
    double eval () const
    {
       return value;
    }
-
-   void prime (const NumberGenerator&  gen)  {}
-
 
 
    void serialize (std::ostream& out) const
@@ -36,27 +39,22 @@ struct Number
 };
 
 
-using
-Integer = Number <int>;
-
-using
-Double = Number <double>;
-
-
-
 
 template <class T> class Random;
 
 template <>
-struct Random<Integer>: public Integer
+struct Random<int>: public Number<int>
 {
    Random (): range (-1000, 1000)  {}
+   Random (const Range& range): range (range)  {}
    Random (int lb, int ub): range (lb, ub)  {}
+   Random (const std::initializer_list<int>&  list): range (list)  {}
 
 
-   void  bound (int lb, int ub)
+   Random&  operator= (const std::initializer_list<int>&  list)
    {
-      range = {lb, ub};
+      range = list;
+      return *this;
    }
 
    void prime (const NumberGenerator&  gen)  
@@ -72,7 +70,7 @@ private:
 
 
 template <>
-struct Random<Double>: public Double
+struct Random<double>: public Number<double>
 {
    Random (): accuracy (6, 2)  {}
 
@@ -98,10 +96,19 @@ private:
 
 
 template <class T>
-struct RandomNot0: public Random<T>
+class RandomNot0: public Random<T>
 {
+public:
    template <class ...Args>
    RandomNot0 (Args&&... args): Random<T> (std::forward<Args>(args)...)  {}
+
+
+   RandomNot0&  operator= (const std::initializer_list<int>& list)
+   {
+     Random<T>::operator= (list);
+      return *this;
+   }
+
 
    void prime (const NumberGenerator&  gen)
    {
@@ -111,6 +118,37 @@ struct RandomNot0: public Random<T>
    }
 };
  
+
+
+
+inline
+BaseExpression*  makeExpression (int value)
+{
+   return  new Number<int> (value);
+}
+
+inline
+BaseExpression*  makeExpression (double value)
+{
+   return  new Number<double> (value);
+}
+
+
+inline
+BaseExpression*  makeExpression (const Range& range)
+{
+   return  new Random <int> {range};
+}
+
+inline
+BaseExpression*  makeExpression (const std::initializer_list<int>& list)
+{
+   return  new Random <int> {list};
+}
+
+
+
+
 } // namespace mathX
 #endif 
 

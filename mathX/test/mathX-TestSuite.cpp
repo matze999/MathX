@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include "NumberGeneratorTest.h"
 #include "PrimiteTest.h"
+#include "OperatorTest.h"
 //#include <iostream>
 
 

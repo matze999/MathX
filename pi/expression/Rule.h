@@ -99,7 +99,6 @@ struct rule0_p
    unique_ptr<Attribute> parse (Scanner& scanner) const
    {
       auto  attribute = std::make_unique <Attribute> (prototype);
-      // unique_ptr<Attribute>  attribute = new Attribute;
 
       if (!parse (scanner, *attribute))
          attribute.release ();

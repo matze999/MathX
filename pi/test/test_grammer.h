@@ -10,7 +10,7 @@ struct Person: Grammer <Person, WhiteSpace>
            >>  int_(age);
    }
 
-   Rule<> start;
+   Rule<Person> start;
 
 
    std::string name;
@@ -62,10 +62,9 @@ std::ostream&  operator<< (std::ostream& out, const Person& person)
 
 void testPersonParser()
 {
-   pi::Range  range ("andre,home,51\nRobert,Kroatien,1234");
+  const char*  text = "andre,home,51\nRobert,Kroatien,1234";
 
    Rule <Person>  person_p;
-   //std::vector<Person>  persons;
    Rule <std::vector<Person>>  start_p;
 
 
@@ -73,9 +72,11 @@ void testPersonParser()
    start_p  = +(person_p >> ignore (ch::eol));
 
    cout << start_p << endl;
-   start_p.parse (range);
 
-   //size_t  len = start_p.getValue().size();
+   std::vector<Person> result;
+   start_p.parse (text, result);
+
+   assert (result.size () == 2)
    //person_grammer.parse (scanner); 
 
 }
@@ -147,26 +148,6 @@ void testPersonBuilder()
 }
 
 
-#if 0
-
-void test_MemberParser()
-{
-
-   class  PersonParser: public MemberParser <Person>
-   {
-      PersonParser(): StartParser (start)
-      {
-         person_ = token(Person::name)
-            >> token(Person::address)
-            >> int_(Person::age);           
-      }
-   };
-
-   Rule <std::vector <Person>>   persons;
-   persons = +PersonParser;
-}
-
-#endif
 
 
 #include "JsonParser.h"

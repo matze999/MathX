@@ -1,8 +1,7 @@
 #ifndef  _BUILDER_PARSER__
 #define  _BUILDER_PARSER__
 
-#include  "rule.h"
-#include  "../scanner/Scanner.h"
+#include  "../base/parser.h"
 
 
 namespace pi { 
@@ -26,7 +25,7 @@ public:
    bool parse (Scanner &scanner, Attribute &attribute) const
    {
       BACK_TRACE;
-      return execute (scanner, attribute);
+      return base->execute (scanner, attribute);
    }
 
    void toString (std::ostream &out, WRITEMODE level = WRITEMODE::COMPACT) const

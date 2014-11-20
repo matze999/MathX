@@ -21,7 +21,7 @@ public:
 
 
    template <class ...Args>
-   BaseParser (Args&&... args): P(args...)   {}
+   BaseParser (Args&&... args): P(std::forward<Args>(args)...)   {}
 
    BaseParser (const BaseParser&) = default;
 
@@ -82,35 +82,8 @@ std::ostream& operator<< (std::ostream &out, const BaseParser<P> &parser)
   
 
 
-using_namespace (::mp)
-
 template <class T>
-struct is_parser: public is_template_of <BaseParser, T>  {};
-
-
-//
-//template <class Parser, class Scanner, class Collector>
-//typename enable_if <is_void <typename Parser::value_type>::value, bool>::type
-//parseImp (const Parser& parser, Scanner &scanner, Collector &collect)
-//{
-//   return parser.parse (scanner, collect);
-//}
-//
-//
-//template <class Parser, class Scanner, class Collector>
-//typename enable_if <!is_void<typename Parser::value_type>::value, bool>::type
-//parseImp (const Parser& parser, Scanner &scanner, Collector &collect)
-//{
-//   TRC_DEBUG (pi) << printExpression (parser) << mgo::endl;
-//   if (parser.parse (scanner, collect))  return true;
-//
-//   TRC_DEBUG(pi) << "no match" << data << mgo::endl;
-//   scanner.getErrorInfo ().addMessage (NO_MATCH, parser, *NO_MATCH);
-//   return false;
-//}
-//
-
-end_using (::mp)
+struct is_parser: public mp::is_template_of <BaseParser, T>  {};
 
 
 

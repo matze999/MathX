@@ -16,20 +16,20 @@ int main()
 {
    try
    {
-      //TEST_CASE (test_Simple);
-      //TEST_CASE (test_CharClass);
-      //TEST_CASE (test_Backref);
-      //TEST_CASE (testWC);
-      //TEST_CASE (test_Switch);
-      //TEST_CASE (test_Switch2);
+      TEST_CASE (test_Simple);
+      TEST_CASE (test_CharClass);
+      TEST_CASE (test_Backref);
+      TEST_CASE (testWC);
+      TEST_CASE (test_Switch);
+      TEST_CASE (test_Switch2);
       //TEST_CASE (test_Map);
-      //TEST_CASE (test_Option);
+      TEST_CASE (test_Option);
       TEST_CASE (test_Operator);
       TEST_CASE (test_Calculator2);
       
 
-      //testGrammer();
-      //test_Switch();
+      //TEST_CASE (testGrammer);
+
       //test_Functor();
       //testCalculator();
 

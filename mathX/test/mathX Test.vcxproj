@@ -15,9 +15,14 @@
     <ClCompile Include="mathX-TestSuite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Function.h" />
+    <ClInclude Include="..\MathExpression.h" />
     <ClInclude Include="..\Number.h" />
     <ClInclude Include="..\NumberGenerator.h" />
+    <ClInclude Include="..\Operator.h" />
+    <ClInclude Include="..\Parser.h" />
     <ClInclude Include="NumberGeneratorTest.h" />
+    <ClInclude Include="OperatorTest.h" />
     <ClInclude Include="PrimiteTest.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

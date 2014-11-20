@@ -27,7 +27,7 @@ TEST (PrimitiveTest, IntegerTest)
    NumberGenerator gen;
 
    int expected_result =  gen();
-   Integer value = expected_result;
+   Number<int> value = expected_result;
    ASSERT_EQ (expected_result, value.eval());
 
    value = 4;
@@ -47,7 +47,7 @@ TEST (PrimitiveTest, IntegerTest)
 TEST (PrimitiveTest, RandomIntTest)
 {
 
-   Random<Integer>  number;
+   Random<int>  number;
    NumberGenerator gen;
    number.prime (gen);
 
@@ -65,7 +65,7 @@ TEST (PrimitiveTest, RandomIntTest)
 TEST (PrimitiveTest, BoundRandomIntTest)
 {
 
-   Random<Integer>  number{ 0, 1 };
+   Random<int>  number{ 0, 1 };
    NumberGenerator gen;
 
    for (int loop = 1; loop < 100; ++loop)
@@ -79,8 +79,8 @@ TEST (PrimitiveTest, BoundRandomIntTest)
    }
 
 
-   RandomNot0<Integer>  number0;
-   number0.bound (-1, 1);
+   RandomNot0<int>  number0;
+   number0 = { -1, 1 };
    for (int loop = 1; loop < 100; ++loop)
    {
       number0.prime (gen);
@@ -97,7 +97,7 @@ TEST (PrimitiveTest, DoubleTest)
    gen (expected_result);
 
 
-   Double  value {expected_result};
+   Number<double>  value {expected_result};
    ASSERT_EQ (expected_result, value.eval());
 
    value = 4.123;
@@ -116,7 +116,7 @@ TEST (PrimitiveTest, DoubleTest)
 TEST (PrimitiveTest, RandomDoubleTest)
 {
 
-   Random<Double>  number;
+   Random<double>  number;
    NumberGenerator gen;
    number.prime (gen);
 
@@ -132,8 +132,7 @@ TEST (PrimitiveTest, RandomDoubleTest)
 
 TEST (PrimitiveTest, BoundRandomDoubleTest)
 {
-
-   Random<Double>  number (1,1);
+   Random<double>  number (1,1);
    NumberGenerator gen;
 
    for (int loop = 1; loop < 100; ++loop)
@@ -145,14 +144,13 @@ TEST (PrimitiveTest, BoundRandomDoubleTest)
       ASSERT_GE (val1, -1);
    }
 
-   RandomNot0 <Double> number0 (1, 1);
+   RandomNot0 <double> number0 (1, 1);
    for (int loop = 1; loop < 100; ++loop)
    {
       number0.prime (gen);
       ASSERT_NE (0, number.eval());
    }
-
-
 }
+
 
 #endif

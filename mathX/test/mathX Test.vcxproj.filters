@@ -13,10 +13,25 @@
     <ClInclude Include="..\NumberGenerator.h">
       <Filter>mathX</Filter>
     </ClInclude>
+    <ClInclude Include="..\Function.h">
+      <Filter>mathX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MathExpression.h">
+      <Filter>mathX</Filter>
+    </ClInclude>
+    <ClInclude Include="OperatorTest.h" />
+    <ClInclude Include="PrimiteTest.h" />
+    <ClInclude Include="..\Operator.h">
+      <Filter>mathX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Parser.h">
+      <Filter>mathX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\NumberGenerator.cpp">
       <Filter>mathX</Filter>
     </ClCompile>
+    <ClCompile Include="mathX-TestSuite.cpp" />
   </ItemGroup>
 </Project>

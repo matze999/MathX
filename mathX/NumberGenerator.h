@@ -15,9 +15,9 @@ struct Range
 {
    static const int MIN = 0x80000000, MAX = 0x7fffffff;
 
-
-   Range (): lb (MIN), ub (MAX)  {}
    Range (int min, int max): lb (min), ub (max)  {}
+
+   Range (): Range (MIN, MAX)  {}
 
    Range (std::initializer_list<int> list)
    {
@@ -124,31 +124,6 @@ public:
 private:
    Generator generator;
    Constraint constr;
-};
-
-
-
-class Accuracy2
-{
-public:
-   Accuracy2 (int digits, int decimals = 2): digits (digits), decimals (decimals)  {}
-
-   int  operator() (int value)
-   {
-      return  4; // value % std::pow (10, digits);
-   }
-
-   double  operator() (double value)
-   {
-      using namespace IEEE;
-      Representation&  num = numeric_cast (value);
-      num.exponent = Representation::BIAS - int (std::pow (10, decimals));
-      return value;
-   }
-
-private:
-   int digits;
-   int decimals;
 };
 
 
