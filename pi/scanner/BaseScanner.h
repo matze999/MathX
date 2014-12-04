@@ -5,7 +5,7 @@
 #include <stack.h>
 #include <sstream>
 #include <ErrorInfo.h>
-
+#include <Range.h>
 
 
 namespace pi {

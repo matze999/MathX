@@ -18,13 +18,13 @@ TEST (NumberGeneratorTest, IntegerGeneration)
    for (unsigned loop = 1; loop < 100; ++loop)
    {
       NumberGenerator gen1;
-      Range range{ 0, 1 };
+      Intval range{ 0, 1 };
       int value = gen1(range);
       ASSERT_LE (value, 1);
       ASSERT_GE (value, 0);
 
       NumberGenerator gen2;
-      Range range2{ -13, -8 };
+      Intval range2{ -13, -8 };
       value = gen2 (range2);
       ASSERT_LE (value, -8);
       ASSERT_GE (value, -13);

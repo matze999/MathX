@@ -3,10 +3,12 @@
 
 #include <ostream>
 #include <Trace.h>
-#include <Range.h>
+//#include <Range.h>
 #include <Expressions.h>
-#include <Listing.h>
+//#include <Listing.h>
 #include <memory>
+
+
 
 #define  BACK_TRACE   TRC_DEBUG (pi) << printExpression (*this) << mgo::endl;
 
@@ -39,7 +41,7 @@ enum ErrorId
    USER_WARNING = 2000,
    USER_ERROR,
 };
- 
+
 
 template <class Scanner>
 bool  MatchSuccess (Scanner& scanner, const std::string&  token)
@@ -52,7 +54,7 @@ bool  MatchSuccess (Scanner& scanner, const std::string&  token)
 template <class Scanner>
 bool  MatchFailure (Scanner& scanner)
 {
-   TRC_DEBUG (pi) << "no match"  << mgo::endl;
+   TRC_DEBUG (pi) << "no match" << mgo::endl;
    return false;
 }
 
@@ -62,9 +64,9 @@ bool  MatchFailure (Scanner& scanner, const Parser&  parser)
 {
    scanner.matchFailure ();
    ErrorInfo& info = scanner.getErrorInfo ();
-   if (info.emptyRecord())
+   if (info.emptyRecord ())
    {
-      scanner.addMessage (::toString (parser), MATCH_FAILURE, scanner.Context());
+      scanner.addMessage (::toString (parser), MATCH_FAILURE, scanner.Context ());
    }
    return false;
 }
@@ -76,11 +78,11 @@ bool  RuleFailure (Scanner& scanner, const std::string&  name)
 {
    scanner.matchFailure ();
    ErrorInfo& info = scanner.getErrorInfo ();
-   if (info.emptyRecord())
+   if (info.emptyRecord ())
    {
-      scanner.addMessage (name, RULE_FAILURE, scanner.Context());
+      scanner.addMessage (name, RULE_FAILURE, scanner.Context ());
    }
-   else if (info.back().code != RULE_FAILURE)
+   else if (info.back ().code != RULE_FAILURE)
    {
       scanner.addMessage (name, RULE_FAILURE);
    }
@@ -102,9 +104,12 @@ struct no_action
    void operator= (const T &) const {}
 };
 
-const no_action null;
+const no_action ignore;
 
 
 } // namespace fn
+
+
+
 } // namespace pi 
 #endif

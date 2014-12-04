@@ -70,7 +70,7 @@ const CharClass <rho::word>		word;
 
 
 
-struct   _eol
+struct  eol_p
 {
    typedef  char  value_type;
    static const int rank = PID::LITERAL;
@@ -78,7 +78,7 @@ struct   _eol
    template <class Scanner, class Attribute>
    bool parse (Scanner &scanner, Attribute &attribute) const
    {
-		rho::parseChar <rho::chars <'\r'>> (scanner, fn::null);
+		rho::parseChar <rho::chars <'\r'>> (scanner, fn::ignore);
 
 		return  rho::parseChar <rho::chars <'\n'>> (scanner, attribute);
    }
@@ -90,13 +90,13 @@ struct   _eol
 };
 
 
-const BaseParser<_eol>  eol;
+const BaseParser<eol_p>  eol;
 
 
 } // namespace ch
 
 
-using ch::WhiteSpace;
+using WhiteSpace = ch::WhiteSpace;
 
 } // namespace pi 
 #endif 

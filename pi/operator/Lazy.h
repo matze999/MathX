@@ -149,7 +149,7 @@ operator- (P &lhs, Q &rhs)
 
 template <class P, class Q>
 typename mp::make_parser <_::lazystar_p, P, Q>::type
-operator* (P &lhs, Q &rhs)
+operator* (const P &lhs, const Q &rhs)
 {
    return  mp::make_parser <_::lazystar_p, P, Q>::execute (lhs, rhs);
 }

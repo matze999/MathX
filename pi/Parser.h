@@ -63,13 +63,17 @@ Operators
 
 Expressions
 
-   Operator<Signatur>    - def a operator parser, which apply a function to values before and after it
+   Operator <Signatur>    - def a operator parser, which apply a function to the values before and after it
 	
 
-   Rule <Attribute>      - def a parser for an Attribute 
+   Rule <Attribute, opt Scanner> - def a parser for an Attribut an for a specific Scanner
 
    Grammer <Attribute, SkipParser>
-   builder <Base, SkipParser>
+   ClassParser <T> - Base class for setup a own parser for class T
+                     You have to implement the method 
+
+                     template <class Scanner>
+                     bool parseImp (Scanner scanner)
 
    ignore(P)    - match P but ignore its result
    no_skip(P)   - match P without using the skip parser in this context
@@ -118,7 +122,7 @@ Expressions
 #include "expression/Rule.h"
 #include "expression/Idle.h"
 #include "expression/NoSkip.h"
-#include "expression/Grammer.h"
+#include "expression/Grammar.h"
 #include "expression/Builder.h"
 #include "expression/Map.h"
 #include "expression/Switch.h"

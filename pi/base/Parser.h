@@ -45,6 +45,12 @@ public:
    }
 
 
+   template <class Scanner>
+   bool parse (Scanner &scanner) const
+   {
+      return parse (scanner, fn::no_action ());
+   }
+
    template <class Value>
    BaseParser <_::reference_p <Value, P>>  operator() (Value& value) const
    {
@@ -73,7 +79,7 @@ public:
 
 
 template <class P>
-std::ostream& operator<< (std::ostream &out, const BaseParser<P> &parser)  
+std::ostream& operator<< (std::ostream &out, const BaseParser<P>& parser)  
 { 
    parser.toString (out, WRITEMODE::EXPAND);
    return out; 

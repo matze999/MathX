@@ -32,8 +32,8 @@ struct reference_p: public UnaryExpression <Parser, PID::EXPRESSION>
 
    void toString (std::ostream &out, WRITEMODE level = WRITEMODE::EXPAND) const
    {
-       writeOperator (out, "", level);
-       out << '(' << getTypeId(T) << ')';
+      child.toString (out, level);
+      out << '(' << getTypeId(T) << ')';
    }
 
 private:

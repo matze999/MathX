@@ -5,14 +5,17 @@
 #include <sstream>
 #include "util.h"
 #include "meta/typetraits.h"
+#include <cctype>
 
 namespace mgo {
 
+
+inline
 const char*  pretty_char (char ch)
 {
-   static char  str[2] = {0};
+   static char  str[2] = { 0 };
 
-   if (ch > 31) 
+   if (ch > 31)
    {
       str[0] = ch;
       return str;
@@ -22,7 +25,7 @@ const char*  pretty_char (char ch)
    return "\?";
 }
 
-
+inline
 void pretty_print (std::ostream& out, const char* str)
 {
    while (*str)
@@ -31,10 +34,10 @@ void pretty_print (std::ostream& out, const char* str)
    }
 }
 
-
+inline
 void pretty_print (std::ostream& out, const std::string& string)
 {
-   with (string)  
+   with (string)
       out << pretty_char (string[pos_]);
 }
 
@@ -42,15 +45,16 @@ void pretty_print (std::ostream& out, const std::string& string)
 template <class Range>
 void pretty_print (std::ostream& out, Range& range)
 {
-   typename Range::Iterator pos = range.begin();
+   typename Range::Iterator pos = range.begin ();
 
-   while (pos != range.end())
+   while (pos != range.end ())
    {
-      out << pretty_char(*pos);
+      out << pretty_char (*pos);
       ++pos;
    }
 }
 
+inline
 std::string  pretty_string (const std::string& str)
 {
    std::stringstream out;
@@ -59,6 +63,7 @@ std::string  pretty_string (const std::string& str)
 }
 
 
+inline
 std::string  toString (char value)
 {
    return  std::string () + value;
@@ -67,7 +72,7 @@ std::string  toString (char value)
 
 
 template <class T>
-typename mp::enable_if <mp::is_arithmetic <T>::value, std::string>::type  
+typename mp::enable_if <mp::is_arithmetic <T>::value, std::string>::type
 toString (const T& value)
 {
    std::stringstream out;
@@ -76,7 +81,7 @@ toString (const T& value)
 }
 
 
-
+inline
 void erase_all (std::string& data, const char*  str)
 {
    size_t pos = 0;
@@ -89,6 +94,7 @@ void erase_all (std::string& data, const char*  str)
 }
 
 
+inline
 void replace_all (std::string& data, const char* old, const char* str)
 {
    size_t pos = 0;
@@ -102,6 +108,40 @@ void replace_all (std::string& data, const char* old, const char* str)
 
 
 
+inline
+bool isWordChar (int ch)
+{
+
+   return  std::isalnum (ch)  ||  ch == '_';
+}
+
+
+inline 
+void removeNestedSpecifiers (std::string& data)
+{
+   size_t  start = 0;
+   int colon_num = 0;
+   for (size_t pos = 0; pos < data.size(); ++pos)
+   {
+      char ch = data[pos];
+
+      if (ch == ':')
+      {
+         if (++colon_num == 2)
+         {
+            data.erase (start, ++pos - start);
+            pos = start;
+            colon_num = 0;
+         }
+      }
+      else if (!isWordChar (ch))
+      {
+         start = pos+1;
+      }
+   }
+}
+
+
 template <class T>
 std::string getTypeIdHelper () 
 {
@@ -109,7 +149,7 @@ std::string getTypeIdHelper ()
 
    erase_all (name, "class ");
    erase_all (name, "struct ");
-   erase_all (name, "std::");
+   removeNestedSpecifiers (name);
 
    replace_all (name, "basic_string<char,char_traits<char>,allocator<char> >", "string");
    return name;

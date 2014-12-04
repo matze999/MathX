@@ -27,8 +27,8 @@ enum  NumeralSystem
 
 
 
-template <class Range, class Base>
-bool  readInteger (Range &range, Base &value)
+template <class Range, class T>
+bool  readInteger (Range &range, T &value)
 {
    if (range.empty())  return false; 
    Range::Iterator  begin = range.begin();

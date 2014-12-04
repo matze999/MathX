@@ -1,6 +1,5 @@
 
-- provide skip parser instance to the rule class
-- guard variable to parser
+- convert (switch) from one scanner instance to an other (e.g. Rule scanner).
 
 
 

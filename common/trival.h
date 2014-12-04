@@ -1,5 +1,5 @@
-#ifndef  _TRIVAL_H_
-#define  _TRIVAL_H_
+#ifndef  _MGO_TRIVAL_H_
+#define  _MGO_TRIVAL_H_
 
 #include "util.h"
 
@@ -10,7 +10,8 @@ class trival
 public:
    trival () = default;
    trival (bool val): value (val)  {}
-   trival (int val): value (val>2? 2: val)  {}
+
+   explicit trival (int val): value (val>2? 2: val)  {}
 
 
    trival&  operator= (const trival&) = default;
@@ -54,7 +55,7 @@ private:
 };
 
 
-const trival undef (2);
+const trival  undef (2);
 
 
 

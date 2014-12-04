@@ -149,7 +149,7 @@ bool assert_imp (bool cond, const char *filename, int linenumber, const char *er
 typedef  unsigned int  uint;
 typedef  unsigned char byte;
 
-
+#ifdef min
 #undef min
 #undef max
 
@@ -164,96 +164,7 @@ const T&  max (const T& lhs, const T& rhs)
 {
     return  lhs < rhs? rhs: lhs;
 }
-
-
-namespace _{
-
-
-template <class T, class Distance = void>
-struct Range0: public Range0<T>
-{
-   Range0 (const T& a, const T& b, Distance step): Range0<T> (a, b), dist(step)  {}
-
-   bool contains (const T& value) const
-   {
-      return  Range0<T>::contains (value)  &&  ((value - first) % dist == 0);
-   }
-
-   Distance dist;
-};
-
-
-template <class T>
-struct Range0 <T, void>
-{
-   Range0 (const T& a, const T& b): first(a), last(b)  {}
-
-   bool contains (const T& value) const
-   {
-      return  first <= value  &&  value <= last;
-   }
-
-   T first, last;
-};
-
-
-
-template <class T>
-Range0<T>  Range (const T& a, const T& b)
-{
-   return  Range0<T> (a, b);
-}
-
-inline
-Range0<int> Range (int a, int b)
-{
-   return Range<int> (a, b);
-}
-
-
-template <class T, class Distance>
-Range0 <T, Distance>  Range (const T& a, const T& b, Distance dist)
-{
-   return  Range0 <T, Distance> (a, b, dist);
-}
-
-inline
-Range0<int, int> Range (int a, int b, int s)
-{
-   return Range<int, int> (a, b, s);
-}
-
-
-template <class Value, class T, class Distance>
-bool operator% (const Value& value, const Range0 <T, Distance>& range)
-{
-   return range.contains (value);
-}
-
-
-} // namespace _
-
-
-inline
-bool in (int val, int max)
-{
-   return  val >= 0  && val <= max;
-}
-
-inline
-bool  in (int val, int min, int max)
-{
-   return  val >= min  &&  val <= max;
-}
-
-#define inside(...)  VA_EXPAND(in__(VA_NARG(__VA_ARGS__))(__VA_ARGS__))
-
-#define in__(num)  in_0 (num)
-#define in_0(num)  in_##num
-
-#define in_1(b)   % _::Range(0, b)
-#define in_2(a,b)   % _::Range(a, b)
-#define in_3(a,b,s)   % _::Range(a, b, s)
+#endif
 
 
 

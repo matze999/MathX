@@ -200,7 +200,6 @@ class AnyChar: public CharSet<_::any_char>
 {
 public:
 
-
    Char  operator() (const char *chars) const
    {
       return  Char (chars);
@@ -220,6 +219,7 @@ public:
 
 
 const AnyChar char_;
+
 
 
 

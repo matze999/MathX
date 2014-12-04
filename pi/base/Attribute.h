@@ -199,6 +199,9 @@ void  assign  (std::string&  attribute, const std::string& value)
 }
 
 
+template <class Attrib>
+void assign (Attrib& attribute, fn::no_action)
+{}
 
 
 

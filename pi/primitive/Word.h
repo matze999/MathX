@@ -15,7 +15,6 @@ struct word_p
    typedef  std::string  value_type;
    enum { rank = PID::LITERAL };
 
-   typedef  std::string  value_type;
 
    template <class Scanner, class Collector>
    bool parse (Scanner &scanner, Collector &collect) const

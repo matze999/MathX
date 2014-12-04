@@ -112,7 +112,6 @@
     <ClInclude Include="test_backref.h">
       <Filter>test</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Parser.h" />
     <ClInclude Include="..\..\common\ErrorInfo.h">
       <Filter>common</Filter>
     </ClInclude>
@@ -154,9 +153,6 @@
     </ClInclude>
     <ClInclude Include="..\..\common\util.h">
       <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\expression\Grammer.h">
-      <Filter>expression</Filter>
     </ClInclude>
     <ClInclude Include="..\operator\Option.h">
       <Filter>operator</Filter>
@@ -213,13 +209,32 @@
     <ClInclude Include="..\expression\Function.h">
       <Filter>expression</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="parser_test.cpp">
+    <ClInclude Include="..\expression\ClassParser.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassParserTest.h">
       <Filter>test</Filter>
-    </ClCompile>
+    </ClInclude>
+    <ClInclude Include="RuleTest.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Parser.h" />
+    <ClInclude Include="..\expression\Grammar.h">
+      <Filter>expression</Filter>
+    </ClInclude>
+    <ClInclude Include="GrammarTest.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicsTest.h">
+      <Filter>test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\todo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ParserTestSuite.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

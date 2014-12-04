@@ -1,6 +1,6 @@
 #include <util.h>
 
-using namespace mgo;
+
 
 
 void test_CharClass()

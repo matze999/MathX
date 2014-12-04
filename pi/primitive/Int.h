@@ -3,7 +3,7 @@
 
 #include "../base/Parser.h"
 #include <numreader.h>
-#include <StrUtils.h>
+//#include <StrUtils.h>
 
 namespace pi {
 
@@ -22,7 +22,7 @@ struct int_p: public add_plain_parser <int_p, int>
    {
       BACK_TRACE;
       int value;
-      if (!readInteger (scanner, value))  
+      if (!mgo::readInteger (scanner, value))  
          return MatchFailure (scanner);
       
       mp::assign (collect, value);

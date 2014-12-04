@@ -138,10 +138,11 @@ using  Allocator = mgo::Allocator <BaseExpression>;
 //template <class T>
 //BaseExpression*  makeExpression (const T& value);
 
-BaseExpression*  makeExpression (int value);
-BaseExpression*  makeExpression (double value);
-BaseExpression*  makeExpression (const Range& range);
-BaseExpression*  makeExpression (const std::initializer_list<int>& list);
+BaseExpression*  makeExpression (int);
+BaseExpression*  makeExpression (double);
+BaseExpression*  makeExpression (const Intval&);
+BaseExpression*  makeExpression (const Accuracy&);
+BaseExpression*  makeExpression (const std::initializer_list<int>&);
 
 
 class Expression
@@ -172,9 +173,16 @@ public:
 
    Expression&  operator= (const std::initializer_list<int>& list)
    {
-      assign (makeExpression (Range{list}) );
+      assign (makeExpression (Intval{list}) );
       return *this;
 
+   }
+
+   Expression&  operator= (const Expression& other)
+   {
+      alloc = other.alloc;
+      expr.reassign (other.expr);
+      return *this;
    }
 
    BaseExpression& get ()

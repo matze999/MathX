@@ -7,9 +7,9 @@ namespace mathX {
 
 
 
-int  NumberGenerator::operator() (const Range& range) const
+int  NumberGenerator::operator() (const Intval& intval) const
 {
-   return  range.lb + device() % range.width();
+   return  intval.lb + device() % intval.width();
 }
 
 

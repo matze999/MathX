@@ -144,6 +144,11 @@ public:
    }
 
 
+   ~Scanner ()
+   {
+      //skip();
+   }
+
    void  reassign (const char*  data, size_t leng = 0)
    {
       base->start_pos = data;
@@ -230,7 +235,7 @@ public:
 
    void addMessage (const std::string& where, unsigned code = 0)
    {
-      assert (base->error_pos != base->end_pos);
+      // assert (base->error_pos != base->end_pos);
       base->error_info.addMessage (where, base->error_pos.line, code);
    }
 
@@ -315,8 +320,17 @@ private:
    SkipScanner&  operator= (const Scanner& other);
 };
 
+
 //template <class Parser>
 //using SkipScanner<Parser> =  Scanner<mgo::Range<const char*>, SkipFun<Parser>>;
+
+namespace mp {
+
+template <class T>
+using is_scanner = is_template_of <Scanner, T>;
+
+}
+
 
 } // namespace pi
 #endif 

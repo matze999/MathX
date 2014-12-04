@@ -49,23 +49,48 @@ using  lazy_enable_if_t = typename lazy_enable_if <cond, T>::type;
 
 
 template <class cond, class T = void>
-using  enable_cif_t = typename enable_if <cond::value, T>::type;
+using  enable_if_ct = typename enable_if <cond::value, T>::type;
 
 template <class cond, class T = void>
-using  lazy_enable_cif_t = typename lazy_enable_if <cond::value, T>::type;
+using  lazy_enable_if_ct = typename lazy_enable_if <cond::value, T>::type;
 
 
 
-template <template <class> class U, class V>
+template <bool cond, class T>
+struct disable_if
+{
+   using type  = T;
+};
+
+template <class T>
+struct disable_if <true, T> {};
+
+
+template <bool cond, class T>
+using  disable_if_t = typename disable_if <cond, T>::type;
+
+
+
+
+template <template  <class ...> class Base, class T>
 class is_template_of
 {
-   template <class T>
-   static  char check (const U<T>&);
+   template <class ...Args>
+   static  char check (const Base<Args...>&);
    static  int  check (...);
-   static  V&   instance();
+   static  T&   instance();
 public:
    static const bool value = sizeof check(instance()) == 1;
 };
+
+
+template <template  <class ...> class Base>
+class is_template_of <Base, void>
+{
+public:
+   static const bool value = false;
+};
+
 
 
 
@@ -133,6 +158,22 @@ struct promote_const
 
 template <class U, class V>
 struct promote_const <const U, V>: public make_const<V> {};
+
+
+
+template <class P, class Q>
+struct replace_void
+{
+   typedef P  type;
+};
+
+
+template <class Q>
+struct replace_void <void, Q>
+{
+   typedef Q  type;
+};
+
 
 
 

@@ -1,8 +1,8 @@
 
-#include <SparseVector.h>
+#include "../SparseVector.h"
 #include <utility>
 #include <algorithm>
-#include "VectorUtils.h"
+#include "../VectorUtils.h"
 
 using namespace mp;
 using namespace mgo;

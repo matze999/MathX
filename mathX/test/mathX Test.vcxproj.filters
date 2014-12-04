@@ -24,9 +24,10 @@
     <ClInclude Include="..\Operator.h">
       <Filter>mathX</Filter>
     </ClInclude>
-    <ClInclude Include="..\Parser.h">
+    <ClInclude Include="..\ExpressionParser.h">
       <Filter>mathX</Filter>
     </ClInclude>
+    <ClInclude Include="ParserTest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\NumberGenerator.cpp">

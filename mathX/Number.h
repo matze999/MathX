@@ -46,7 +46,7 @@ template <>
 struct Random<int>: public Number<int>
 {
    Random (): range (-1000, 1000)  {}
-   Random (const Range& range): range (range)  {}
+   Random (const Intval& range): range (range)  {}
    Random (int lb, int ub): range (lb, ub)  {}
    Random (const std::initializer_list<int>&  list): range (list)  {}
 
@@ -63,7 +63,7 @@ struct Random<int>: public Number<int>
    }
 
 private:
-   Range  range;
+   Intval  range;
 };
 
 
@@ -72,9 +72,11 @@ private:
 template <>
 struct Random<double>: public Number<double>
 {
-   Random (): accuracy (6, 2)  {}
+   Random (): accuracy (5, 2)  {}
 
    Random (int mantisse, int decimals): accuracy (mantisse, decimals)  {}
+
+   Random (const Accuracy& accuracy): accuracy (accuracy)  {}
 
 
    void  setAccurancy (int mantisse, int decimals)
@@ -135,9 +137,9 @@ BaseExpression*  makeExpression (double value)
 
 
 inline
-BaseExpression*  makeExpression (const Range& range)
+BaseExpression*  makeExpression (const Intval& intval)
 {
-   return  new Random <int> {range};
+   return  new Random <int> {intval};
 }
 
 inline
@@ -146,6 +148,17 @@ BaseExpression*  makeExpression (const std::initializer_list<int>& list)
    return  new Random <int> {list};
 }
 
+inline
+BaseExpression*  makeExpression (const Accuracy& accuracy)
+{
+   assert0 (accuracy.mantisse < 10);
+   if (accuracy.decimals == 0)
+   {
+      int limit = (int) std::pow (10, accuracy.mantisse);
+      return  new Random <int> (-limit, limit);
+   }
+   return  new Random <double> (accuracy);
+}
 
 
 

@@ -63,58 +63,6 @@ struct make_parser: public
    if_<and <is_chararray<P>, is_parser<Q>>::value, LiteralParserOperator <Op, Q>,
                                                    UndefOperator>>>::type  {};
 
-//template <class P>
-//struct parser_id
-//{
-//   static const int value = (int) is_parser <P>::value +
-//                            (int) is_base_of <operator_parser_tag, P>::value +
-//                            (int) is_chararray <P>::value * 3;
-//};
-//
-//template <class P, class Q, 
-//          int left_id= parser_id<P>::value, 
-//          int right_id= parser_id<Q>::value>
-//struct  and_parser {};
-//
-//template <class P, class Q>
-//struct  and_parser <P, Q, 1, 1>
-//{
-//   using base = _::and_p <typename P::type, typename Q::type>;
-//   using type = BaseParser <base>;
-//
-//   static
-//   type  execute (const P &lhs, const Q &rhs)
-//   {
-//      return type (lhs, rhs);
-//   }
-//};
-//
-//template <class P, class Q>
-//struct  and_parser <P, Q, 3, 1>
-//{
-//   using base = _::and_p <_::lit_p, typename Q::type>;
-//   using type = BaseParser <base>;
-//
-//   static
-//   type  execute (const char* lhs, const Q &rhs)
-//   {
-//      return type (_::lit_p(lhs), rhs);
-//   }
-//};
-//
-//template <class P, class Q>
-//struct  and_parser <P, Q, 1, 3>
-//{
-//   using base = _::and_p <typename P::type, _::lit_p>;
-//   using type = BaseParser <base>;
-//
-//   static
-//   type  execute (const char* lhs, const Q &rhs)
-//   {
-//      return type (lhs, _::lit_p(rhs));
-//   }
-//};
-//
 
 } // namespace mp
 } // namespace pi

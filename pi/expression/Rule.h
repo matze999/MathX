@@ -7,6 +7,8 @@
 #include "../base/Parser.h"
 #include "../base/Attribute.h"
 #include <meta/typetraits.h>
+#include <meta/if.h>
+#include <meta/is_chararray.h>
 
 #include <memory>
 
@@ -81,7 +83,12 @@ StringMap&  RuleMap()
 template <class Attribute, class Scanner>
 struct rule0_p
 {
+   static_assert (mp::is_scanner<Scanner>::value,
+      "Invalid template argument for Scanner in Rule definition.");
+
    enum { rank =  PID::RULE };
+
+   typedef  Scanner  scanner_type;
 
    rule0_p (): child (nullptr)  
    {
@@ -96,7 +103,7 @@ struct rule0_p
    }
 
 
-   unique_ptr<Attribute> parse (Scanner& scanner) const
+   std::unique_ptr<Attribute> parse (Scanner& scanner) const
    {
       auto  attribute = std::make_unique <Attribute> (prototype);
 
@@ -198,26 +205,26 @@ template
 >
 struct rule_p: public rule0_p <Attribute, Scanner>
 {
+
+
    template <class ...Args>
-   rule_p (Args&&... args): prototype (args...)  {}
+   rule_p (Args&&... args): prototype (std::forward<Args>(args)...)  {}
 
 
    std::unique_ptr<Attribute> parse (Scanner& scanner) const
    {
       auto  attribute = std::make_unique<Attribute> (prototype);
 
-      if (!parse (scanner, *attribute))
+      if (!child->parse (scanner, *attribute))
+      {
          attribute.release ();
-
+         RuleFailure (scanner, name);
+      }
       return attribute;
    }
     
-   bool  parse (Scanner &scanner, Attribute&  attribute) const 
-   { 
-      if (child->parse (scanner, attribute))  return true;
-      else return  RuleFailure (scanner, name);
-   }
    
+
    template <class Collector>
    bool  parse (Scanner &scanner, Collector&  collect) const 
    { 
@@ -230,6 +237,7 @@ struct rule_p: public rule0_p <Attribute, Scanner>
    }
 
 protected:
+
    rule_p (const rule_p&) = delete;
 
    Attribute  prototype;
@@ -249,21 +257,65 @@ struct ref_to <rule0_p <T, Scanner>>
    typedef  const pi::_::rule0_p <T, Scanner>&  type;
 };
 
-
 } // namespace _
-
-
 
 
 
 //*** Rule
 
+namespace mp {
+
+template <class T1, class T2, class dummy = void>
+struct make_rule
+{
+   typedef  typename mp::replace_void <T1, fn::no_action>::type  Attribute;
+   typedef  typename mp::replace_void <T2, Scanner<>>::type  Scanner;
+
+   typedef  BaseParser <_::rule0_p <Attribute, Scanner>>  type;
+};
+
+
+template <class T1, class T2>
+struct make_rule <T1, T2, 
+   typename mp::enable_if <is_parser <T2>::value>::type>
+{
+   typedef  BaseParser <_::rule0_p <T1, SkipScanner<T2>>>  type;
+};
+
+
+
+template <class T1, class T2>
+struct make_rule <T1, T2, 
+   typename mp::enable_if <mp::is_template_of <Scanner, T1>::value>::type>
+{
+   typedef  typename mp::replace_void <T2, fn::no_action>::type  Attribute;
+
+   typedef  BaseParser <_::rule0_p <Attribute, T1>>  type;
+};
+
+
+template <class T1, class T2>
+struct make_rule <T1, T2, 
+   typename mp::enable_if <is_parser <T1>::value>::type>
+{
+   typedef  typename mp::replace_void <T2, fn::no_action>::type  Attribute;
+
+   typedef  BaseParser <_::rule0_p <Attribute, SkipScanner<T1>>>  type;
+};
+
+
+
+}  // namespace mp
+
+
+
+
 template 
 <
-   class Attribute,
-   class Scanner   = pi::Scanner<>
+   class T1 = void,
+   class T2 = void
 >
-class Rule0: public BaseParser <_::rule0_p <Attribute, Scanner>>
+class Rule0: public mp::make_rule <T1, T2>::type
 {
 public:
    Rule0 () = default;
@@ -283,10 +335,30 @@ public:
    }
 
 
+   using mp::make_rule <T1, T2>::type::parse;
+
+   template <class Scanner>
+   typename mp::disable_if <mp::is_chararray<Scanner>::value, bool>::type
+   parse (Scanner& scanner)
+   {
+      return  parse (scanner, fn::ignore);
+   }
+
+
+   void parse (const char* data)
+   {
+      typename  mp::make_rule <T1, T2>::type::scanner_type scanner (data);
+      if (!parse (scanner, fn::ignore))
+         throw  scanner.getErrorInfo ();
+   }
+
+
 private:
    Rule0 (const Rule0& other) = delete;
    Rule0&  operator= (const Rule0&) = delete;
 };
+
+
 
 
 
@@ -300,7 +372,7 @@ class Rule: public BaseParser <_::rule_p <Attribute, Scanner>>
 public:
 
    template <class ...Args>
-   Rule (Args&&...  args): Super (args...)   {}
+   explicit Rule (Args&&...  args): Super (args...)   {}
 
 
    template <class P>

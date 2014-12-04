@@ -20,15 +20,17 @@
     <ClInclude Include="..\Number.h" />
     <ClInclude Include="..\NumberGenerator.h" />
     <ClInclude Include="..\Operator.h" />
-    <ClInclude Include="..\Parser.h" />
+    <ClInclude Include="..\ExpressionParser.h" />
     <ClInclude Include="NumberGeneratorTest.h" />
     <ClInclude Include="OperatorTest.h" />
+    <ClInclude Include="ParserTest.h" />
     <ClInclude Include="PrimiteTest.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{91C82197-391E-4757-8B6C-788B3ADCB9BE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>parser</RootNamespace>
+    <ProjectName>mathX-TestSuite</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -84,7 +86,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Profile>false</Profile>
       <AdditionalLibraryDirectories>c:\libs</AdditionalLibraryDirectories>
-      <AdditionalDependencies>gtest_gdb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtest_dbg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
