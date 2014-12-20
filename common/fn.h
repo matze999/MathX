@@ -106,6 +106,28 @@ struct  logical_or
 };
 
 
+
+template <class T>
+struct value
+{
+   value (const T& data): data (data)  {}
+
+   template <class ...Args>
+   const T&  operator() (Args...) const
+   {
+      return data;
+   }
+
+   T data;
+};
+
+
+template <class T>
+value<T>  val (const T& data)
+{
+   return value<T> (data);
+}
+
 }} // namespace fn and mgo
 #endif
 

@@ -4,7 +4,7 @@
 
 #include <random>
 #include <sstream>
-#include <gtest/gtest.h>
+#include <gtest++.h>
 #include "../Number.h"
 #include "../NumberGenerator.h"
 
@@ -13,11 +13,6 @@ using namespace mathX;
 
 
 
-
-bool isInteger (double value)
-{
-   return  value ==  (int) value;
-}
 
 
 
@@ -140,8 +135,7 @@ TEST (PrimitiveTest, BoundRandomDoubleTest)
       number.prime (gen);
       double val1 = number.eval ();
 
-      ASSERT_LE (val1, 1);
-      ASSERT_GE (val1, -1);
+      ASSERT_IN (val1, -1, 1);
    }
 
    RandomNot0 <double> number0 (1, 1);

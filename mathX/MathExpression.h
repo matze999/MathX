@@ -57,6 +57,7 @@ enum Level
 
 
 
+
 bool LevelInCategory (Level level, Level category)
 {
    int value = (int) level - (int) category;
@@ -165,7 +166,8 @@ public:
 
 
    template <class T>
-   Expression&  operator= (T&& value)
+   typename mp::disable_if <mp::is_base_of <Expression, T>::value, Expression&>::type 
+   operator= (T&& value)
    {
       assign (makeExpression (std::forward<T>(value)));
       return *this;
@@ -178,10 +180,11 @@ public:
 
    }
 
+
    Expression&  operator= (const Expression& other)
    {
       alloc = other.alloc;
-      expr.reassign (other.expr);
+      expr.reassign(other.expr);
       return *this;
    }
 

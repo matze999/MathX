@@ -44,6 +44,7 @@ TEST (OperatorTest, ExpressionAssignment)
 
    REPEAT (10)
    {
+
       number = Accuracy (1, 0);
       number.prime (gen);
       double  value = number.eval();
@@ -59,7 +60,7 @@ TEST (OperatorTest, ExpressionAssignment)
       number.prime (gen);
       double  value = number.eval();
       value *= 100;
-      ASSERT_DOUBLE_EQ (value, int(value));
+      ASSERT_INT (value);
 
       value /= 10000;
       ASSERT_IN (value, -1, 1);

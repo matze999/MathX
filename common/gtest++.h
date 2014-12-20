@@ -19,7 +19,18 @@
 
 
 
+bool isInteger (double value)
+{
+   return  value ==  rint(value);
+}
+
+
+
+#define ASSERT_INT(val)  ASSERT_DOUBLE_EQ (val, rint(val)) << "Expect a integer here"
+
+
 #define NOTEST(a, b)  void a##b()
 #define NOTEST_F(a, b)  void a##b()
+
 
 #endif

@@ -3,7 +3,7 @@
 
 
 #include <sstream>
-#include <gtest/gtest.h>
+#include <gtest++.h>
 #include "../NumberGenerator.h"
 
 
@@ -20,14 +20,12 @@ TEST (NumberGeneratorTest, IntegerGeneration)
       NumberGenerator gen1;
       Intval range{ 0, 1 };
       int value = gen1(range);
-      ASSERT_LE (value, 1);
-      ASSERT_GE (value, 0);
+      ASSERT_IN (value, 0, 1);
 
       NumberGenerator gen2;
       Intval range2{ -13, -8 };
       value = gen2 (range2);
-      ASSERT_LE (value, -8);
-      ASSERT_GE (value, -13);
+      ASSERT_IN (value, -13, -8);
    }
 }
 

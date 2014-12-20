@@ -140,6 +140,7 @@
       <PreprocessToFile>false</PreprocessToFile>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <BrowseInformation>true</BrowseInformation>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

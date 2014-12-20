@@ -76,6 +76,18 @@ public:
       {
          value = operator()();
       }
+      return value;
+   }
+
+
+   int  operator() (const Intval&  range, bool exclude_zero) const
+   {
+      int value = operator()(range);
+      if (exclude_zero) while (value == 0)
+      {
+         value = operator()(range);
+      }
+      return value;
    }
 
    void  operator() (double& value) const;
@@ -89,16 +101,15 @@ private:
 
 struct Accuracy
 {
-   static const unsigned UNBOUNDED = -1;
+   Accuracy (): mantisse (6), decimals (0), exclude_zero (false)  {}
 
-   Accuracy (): mantisse (10), decimals (UNBOUNDED)  {}
-
-   Accuracy (int digits, int decimals): mantisse (digits), decimals (decimals)  {}
+   Accuracy (int digits, int decimals): mantisse (digits), decimals (decimals), exclude_zero (false)  {}
 
    double  generate (const NumberGenerator& gen);
 
    int mantisse;
    int decimals;
+   bool exclude_zero;
 };
 
 

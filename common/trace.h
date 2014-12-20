@@ -1,5 +1,5 @@
-#ifndef __TRACE_
-#define __TRACE_
+#ifndef _MGO_TRACE_
+#define _MGO_TRACE_
 
 #include <iostream>
 #include <iomanip>
@@ -48,7 +48,8 @@
       if (mgo::TraceIndentBlock  tb)
 
 
-#define  TRC_SECTION(level)   if (mgo::TraceSection _=level)
+#define  TRC_SECTION(level)   if (mgo::TraceSection _trace_section_=level)
+
 
 
 
@@ -58,6 +59,7 @@ namespace mgo {
 struct TraceLine: public std::stringstream
 {
    TraceLine(): level(TL_DEBUG)  {}
+
    TraceLine::TraceLine(const TraceLine &tl) 
    {
       level  = tl.level;
@@ -117,11 +119,6 @@ public:
    }
 
 
-   friend  void endl (Trace &trace)
-   {
-      trace.writeLine ();
-   }
-
    
    TraceLine&   operator[] (TraceKey comp)            { return  map[comp]; }
 
@@ -149,6 +146,12 @@ public:
    }
 
 
+   friend  void endl (Trace &trace)
+   {
+      trace.writeLine ();
+   }
+
+
 private:
    std::ostream &File()               
    {
@@ -162,7 +165,7 @@ private:
    {
       if (trace_line == nullptr)  return;
 
-      File() << std::setw(8) << std::left << trace_section << ": ";
+      File() << trace_section << ": ";
       if (indent)
       {
          File() << "   ";
@@ -179,7 +182,7 @@ private:
 
    std::string   file_name;
    TraceLine    *trace_line;
-   TraceKey  trace_section;
+   TraceKey      trace_section;
    bool          is_line_writen;
 };
 

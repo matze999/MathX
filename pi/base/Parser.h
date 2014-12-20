@@ -63,6 +63,12 @@ public:
       return _::functor_p <Fun, P> (fun, *this);
    }
 
+   template <class Fun>
+   BaseParser <_::functor_p <Fun, P>>  apply (Fun& fun) const
+   {
+      return _::functor_p <Fun, P> (fun, *this);
+   }
+
 
    BaseParser <_::log_p <P, MSG_TYPE::WARNING>>  
    warning (const std::string& msg, unsigned code = 0) const

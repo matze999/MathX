@@ -28,6 +28,14 @@ struct ExpressionParserTest: public testing::Test
     // before the destructor).
    }
 
+   void assertRandomNumber (Expression& expr)
+   {
+      double res = expr.eval ();
+      expr.prime (gen);
+      ASSERT_NE (res, expr.eval());
+   }
+
+   double  parseRandomNumber (const char* input);
 
    Allocator alloc;
    NumberGenerator gen;
@@ -42,6 +50,7 @@ TEST_F (ExpressionParserTest, testIntegerInput)
 
 
    parser.parse ("12", number);
+   
    number.prime (gen);
    ASSERT_EQ (12, number.eval ());
 
@@ -51,26 +60,98 @@ TEST_F (ExpressionParserTest, testIntegerInput)
 }
 
 
-TEST_F (ExpressionParserTest, testRandomNumber)
+
+double  ExpressionParserTest::parseRandomNumber (const char* input)
 {
    Expression  number (alloc);
+   std::stringstream out;
 
-   TRC_LEVEL = TL_DEBUG;
+   double result;
    try
    {
-      parser.parse ("#1", number);
+      parser.parse (input, number);
+      number.prime (gen);
+      number.serialize (out);
+      out >> result;
    }
    catch (ErrorInfo& info)
    {
       cout << info;
-      ASSERT_TRUE (false);
+      return 0;
    }
+   return  result;
+}
 
+
+
+TEST_F (ExpressionParserTest, testRandomNumber)
+{
+   double result;
    REPEAT (10)
    {
-      number.prime (gen);
-      ASSERT_IN (number.eval(), 0, 10);
+      result = parseRandomNumber ("#1");
+      ASSERT_IN (result, -10, 10);
+      ASSERT_TRUE (isInteger (result));
+
+
+      result = parseRandomNumber ("#1.1");
+      ASSERT_IN (result, -1, 1);
+
+
+      result = parseRandomNumber ("#[1,4]");
+      ASSERT_IN (result, 1, 4);
+      ASSERT_TRUE (isInteger (result));
+
+
+
+      //TRC_LEVEL = TL_DEBUG;
+      result = parseRandomNumber ("#*1");
+      ASSERT_NE (0, result) << "zero generated for #*1";
+
+
+      result = parseRandomNumber ("#*1.1");
+      ASSERT_NE (0, result) << "zero generated for #*1.1";
+
    }
+}
+
+
+
+TEST_F(ExpressionParserTest, testSum)
+{
+   Expression expression(alloc);
+
+   parse(parser, "4+3", expression);
+   ASSERT_EQ (7, expression.eval());
+
+
+   parse(parser, "1-2", expression);
+   ASSERT_EQ (-1, expression.eval());
+
+   parse(parser, "1 + 1 + 1", expression);
+   ASSERT_EQ (3, expression.eval());
+
+   parse(parser, "1 - 1 + 1", expression);
+   ASSERT_EQ (1, expression.eval());
+}
+
+
+TEST_F(ExpressionParserTest, testProduct)
+{
+   Expression expression(alloc);
+
+   parse(parser, "4*3", expression);
+   ASSERT_EQ(12, expression.eval());
+
+
+   parse(parser, "1/2", expression);
+   ASSERT_EQ(0.5, expression.eval());
+
+   parse(parser, "1 * 1 * 1", expression);
+   ASSERT_EQ(1, expression.eval());
+
+   parse(parser, "2 / 1 * 3", expression);
+   ASSERT_EQ(6, expression.eval());
 }
 
 

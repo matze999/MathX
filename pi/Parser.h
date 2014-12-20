@@ -124,8 +124,10 @@ Expressions
 #include "expression/NoSkip.h"
 #include "expression/Grammar.h"
 #include "expression/Builder.h"
+#include "expression/Symbol.h"
 #include "expression/Map.h"
 #include "expression/Switch.h"
+
 
 
 namespace pi {

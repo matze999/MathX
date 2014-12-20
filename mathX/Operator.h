@@ -9,23 +9,23 @@ namespace mathX {
 
 
 
-inline
-Expression  operator+ (const Expression& lhs, const Expression& rhs)
-{
-   auto func = new BinaryFunction ("+", std::plus<double> ());
-   func->setArgs (lhs.get(), rhs.get());
+#define  MATHX_MAKE_OPERATOR(op, func)  \
+   inline Expression  operator op (const Expression& lhs, const Expression& rhs) {\
+      auto bfun = new BinaryFunction(#op, func()); \
+      bfun->setArgs(lhs.get(), rhs.get()); \
+      return  Expression(lhs.getAllocator(), bfun); }
 
-   return  Expression(lhs.getAllocator(), func);
-}
 
-inline
-Expression  operator- (const Expression& lhs, const Expression& rhs)
-{
-   auto func = new BinaryFunction ("-", std::minus<double> ());
-   func->setArgs (lhs.get(), rhs.get());
 
-   return  Expression(lhs.getAllocator(), func);
-}
+MATHX_MAKE_OPERATOR (+, std::plus<double>)
+MATHX_MAKE_OPERATOR (-, std::minus<double>)
+
+MATHX_MAKE_OPERATOR (*, std::multiplies<double>)
+MATHX_MAKE_OPERATOR (/ , std::divides<double>)
+
+
+
+#undef MATHX_MAKE_OPERATOR
 
 
 } // namespace mathX

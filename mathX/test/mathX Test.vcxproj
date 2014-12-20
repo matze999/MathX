@@ -80,6 +80,7 @@
       <PreprocessToFile>false</PreprocessToFile>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,6 +89,9 @@
       <AdditionalLibraryDirectories>c:\libs</AdditionalLibraryDirectories>
       <AdditionalDependencies>gtest_dbg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

@@ -23,9 +23,10 @@ void  NumberGenerator::operator() (double& value) const
 
 double Accuracy::generate (const NumberGenerator& gen)
 {
-   assert0 (mantisse < 11);
+   if (mantisse > 10)  mantisse = 10;
+
    int bound = (int) std::pow (10, mantisse);
-   double value = gen ({ -bound, bound });
+   double value = gen ({ -bound, bound }, exclude_zero);
 
    return  value / std::pow (10, decimals);
 }

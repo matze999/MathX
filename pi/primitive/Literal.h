@@ -10,7 +10,7 @@ namespace _ {
 
 struct lit_p
 {
-   typedef  void  value_type;
+   typedef  fn::no_action  value_type;
    enum { rank = PID::LITERAL };
 
    lit_p (const char *chars): data (chars)  {}
@@ -55,7 +55,8 @@ protected:
 
 struct token_p: public lit_p
 {
-   //typedef  std::string  value_type;
+   typedef  std::string  value_type;
+
    enum { rank = PID::LITERAL };
 
    token_p (const char *str): lit_p (str)  {}
