@@ -32,12 +32,22 @@ struct BinaryFunction: public make_expression <BinaryFunction>
    }
 
 
-   void serialize (std::ostream& out) const
+   void serialize(std::ostream& out) const override
    {
+      out << name << " (";
       arg1->serialize (out);
-      out << name;
+      out << ", ";
       arg2->serialize (out);
+      out << ")";
    }
+
+protected:
+   template <class F>
+   BinaryFunction(Priority::Level  priority, const char* name, const F& fun):
+      Super (priority),
+      name(name),
+      func(fun) {}
+
 
    const char* name;
    std::function <double(double, double)>  func;

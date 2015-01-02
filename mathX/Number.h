@@ -155,7 +155,10 @@ BaseExpression*  makeExpression (const Accuracy& accuracy)
    if (accuracy.decimals == 0)
    {
       int limit = (int) std::pow (10, accuracy.mantisse);
-      return  new Random <int> (-limit, limit);
+      if (accuracy.exclude_zero)
+         return  new RandomNot0 <int> (-limit, limit);
+      else
+         return  new Random <int> (-limit, limit);
    }
    return  new Random <double> (accuracy);
 }

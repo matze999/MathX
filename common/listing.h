@@ -90,6 +90,20 @@ public:
    static  iterator  begin()           { return  data; }
    static  iterator  end()             { return  data + length; }
 
+
+   struct  Instances_t
+   {
+      typedef  Target*  iterator;
+
+      static  size_t size()            { return length; }
+
+      static  iterator  begin()        { return  data; }
+      static  iterator  end()          { return  data + length; }
+
+   };
+
+   static Instances_t  Instances;
+
 protected:
    static const unsigned  npos = -1;
 

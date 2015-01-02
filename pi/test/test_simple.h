@@ -92,6 +92,22 @@ void test_ReferenceParser()
 }
 
 
+
+TEST (NumberTest, Consolidation)
+{
+   double result;
+   parse (number, "2", result);
+   ASSERT_DOUBLE_EQ (2, result);
+
+   int  ival;
+   parse (number, "2", ival);
+   ASSERT_EQ (2, result);
+
+   parse (number, "2.1", result);
+   ASSERT_DOUBLE_EQ (2.1, result);
+
+}
+
 void test_Simple()
 {
    testAndOr <pi::Scanner<>> ();

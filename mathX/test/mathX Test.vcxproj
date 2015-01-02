@@ -21,6 +21,7 @@
     <ClInclude Include="..\NumberGenerator.h" />
     <ClInclude Include="..\Operator.h" />
     <ClInclude Include="..\ExpressionParser.h" />
+    <ClInclude Include="..\Variable.h" />
     <ClInclude Include="NumberGeneratorTest.h" />
     <ClInclude Include="OperatorTest.h" />
     <ClInclude Include="ParserTest.h" />

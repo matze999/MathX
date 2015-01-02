@@ -18,6 +18,29 @@ bool in (Num val, Num lb, Num ub)
 }
 
 
+
+inline
+bool isEqual (double lhs, double rhs)
+{
+   return  _dpcomp (lhs, rhs) == _FP_EQ;
+}
+
+
+template <class T>
+inline 
+double  roundInt (T value)
+{
+   return  rint (value);
+}
+
+
+inline 
+bool isInteger (double value)
+{
+   return isEqual (value, rint (value));
+}
+
+
 enum  NumeralSystem
 {
    Decimal,

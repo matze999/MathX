@@ -28,6 +28,9 @@
       <Filter>mathX</Filter>
     </ClInclude>
     <ClInclude Include="ParserTest.h" />
+    <ClInclude Include="..\Variable.h">
+      <Filter>mathX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\NumberGenerator.cpp">

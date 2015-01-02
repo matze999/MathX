@@ -3,6 +3,7 @@
 
 
 #include <gtest++.h>
+#include <StrUtils.h>
 #include "../NumberGenerator.h"
 #include "../Number.h"
 #include "../ExpressionParser.h"
@@ -152,6 +153,97 @@ TEST_F(ExpressionParserTest, testProduct)
 
    parse(parser, "2 / 1 * 3", expression);
    ASSERT_EQ(6, expression.eval());
+}
+
+
+TEST_F(ExpressionParserTest, testPower)
+{
+   Expression expression(alloc);
+
+   parse(parser, "4^3", expression);
+   ASSERT_EQ (64, expression.eval());
+
+
+   parse(parser, "4^0.5", expression);
+   ASSERT_EQ (2, expression.eval());
+
+   parse(parser, "2*3^2", expression);
+   ASSERT_EQ (18, expression.eval());
+
+   parse(parser, "2^2*3", expression);
+   ASSERT_EQ (12, expression.eval());
+}
+
+
+
+TEST_F(ExpressionParserTest, testEqual)
+{
+   Expression expression(alloc);
+
+   parse (parser, "-1 = -1", expression);
+   ASSERT_EQ (1, expression.eval());
+
+
+   parse (parser, "-1 = 42", expression);
+   ASSERT_EQ (0, expression.eval());
+
+   parse(parser, "1 = a", expression);
+   ASSERT_TRUE (isnan (expression.eval()));
+
+   parse(parser, "mm = mm", expression);
+   ASSERT_TRUE (isnan (expression.eval()));
+}
+
+
+TEST_F(ExpressionParserTest, testRoundBracket)
+{
+   Expression expression(alloc);
+
+   parse (parser, "0 + 3 * 2", expression);
+   ASSERT_EQ (6, expression.eval());
+
+   parse (parser, "4 + (3*2)", expression);
+   ASSERT_EQ (10, expression.eval());
+
+   parse (parser, "(4 + 3)*2", expression);
+   ASSERT_EQ (14, expression.eval());
+
+   parse (parser, "(2*4)^2-2^3^2", expression);
+   ASSERT_EQ (0, expression.eval());
+
+   parse (parser, "2^(3^2)", expression);
+   ASSERT_EQ (512, expression.eval());
+}
+
+
+TEST_F(ExpressionParserTest, testOperatorPriority)
+{
+   using namespace mgo;
+
+   Expression expression(alloc);
+   std::stringstream out;
+   std::string result;
+
+   parse (parser, "4 + 3 * 2", expression);
+   expression.serialize (out);
+   result = out.str();
+   erase_all (result, " ");
+   ASSERT_EQ ("4+3*2", result);
+
+   parse (parser, "4+(3*2)", expression);
+   out.str("");
+   expression.serialize(out);
+   result = out.str();
+   erase_all(result, " ");
+   ASSERT_EQ("4+3*2", result);
+
+   parse (parser, "(4+3)*2", expression);
+   out.str("");
+   expression.serialize(out);
+   result = out.str();
+   erase_all(result, " ");
+   ASSERT_EQ("(4+3)*2", result);
+
 }
 
 

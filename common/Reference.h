@@ -46,10 +46,16 @@ public:
 
 // ***  Container methods
    template <class T>
-   void  push_back (T&& val) const              { get().push_back (val); }
+   void  push_back (T&& val) const              
+   {
+      get().push_back (std::forward<T>(val)); 
+   }
 
    template <class ...Args>
-   void  emplace_back (Args&&... args) const    { get().emplace_back (args...); }
+   void  emplace_back (Args&&... args) const    
+   { 
+      get().emplace_back (std::forward<Args>(args)...); 
+   }
 
    bool  empty() const                          { return  get().empty(); }
    size_t  size() const                         { return  get().size(); }

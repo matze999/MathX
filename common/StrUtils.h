@@ -111,7 +111,6 @@ void replace_all (std::string& data, const char* old, const char* str)
 inline
 bool isWordChar (int ch)
 {
-
    return  std::isalnum (ch)  ||  ch == '_';
 }
 
@@ -140,6 +139,7 @@ void removeNestedSpecifiers (std::string& data)
       }
    }
 }
+
 
 
 template <class T>

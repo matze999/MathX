@@ -76,31 +76,41 @@ struct  SkipParser: public pi::Rule0<>
 
 
 
-class ExpressionParser: 
+class ExpressionParser:
    public pi::Grammar <Expression, SkipParser>,
    private pi::op<Expression>
 {
 public:
-   ExpressionParser (Allocator&  allocator): start_rule (sum),
+   ExpressionParser (Allocator&  allocator): start_rule (equation),
       alloc (allocator),
+      equation (allocator),
       term (allocator),
       sum (allocator),
-      product (allocator)
+      product (allocator),
+      exponent (allocator)
    {
       using namespace pi;
 
 
-      term = int_
-           | "#" >> (intval | accuracy);
+      term = number
+         | word
+         | "#" >> (intval | accuracy)
+         | "(" >> sum >> ")";
 
       sum = product % (plus | minus);
-      product = term % (multiply | divide);
+      product = exponent % (multiply | divide);
+      exponent = term % power;
+
+      equation = sum >> -(equal >> sum);
    }
 
 private:
    Allocator&  alloc;
-   Rule<Expression>  term;
-   Rule<Expression>  sum, product;
+   Rule<Expression>  equation, term;
+   Rule<Expression>  sum, product, exponent;
+
+   pi::Operator<Expression> power = { "^", pow };
+   pi::Operator<Expression> equal = { "=", mathX::eq };
 
    IntvalParser<scanner_type> intval;
    AccuracyParser<scanner_type>  accuracy;

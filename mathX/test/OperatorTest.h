@@ -84,4 +84,6 @@ TEST (OperatorTest, Plus)
    ASSERT_DOUBLE_EQ (0.2, (v2-v1).eval());
 }
 
+
+
 #endif

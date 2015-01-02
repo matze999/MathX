@@ -66,7 +66,7 @@ const CharClass <rho::digit>		digit;
 
 const CharClass <rho::alpha>		alpha;
 const CharClass <rho::alphanum>  alphanum;
-const CharClass <rho::word>		word;
+const CharClass <rho::word>		   word;
 
 
 

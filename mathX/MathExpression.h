@@ -56,26 +56,27 @@ enum Level
 };
 
 
-
-
-bool LevelInCategory (Level level, Level category)
+Level  Operator(char ch)
 {
-   int value = (int) level - (int) category;
-   return  0 <= value && value < 1000;
+   return   ch == '+' ? PLUS :
+      ch == '-' ? MINUS :
+      ch == '*' ? MULTIPLY :
+      ch == '/' ? DIVIDE : BINARY_OPERATOR;
 }
 
 
 
-Level  LevelToCategory (Level level)
+
+Level  Category (Level level)
 {
-   return  static_cast<Level> ((int) level / 1000);
+   return  static_cast<Level> (((int) level / 1000) * 1000);
 
 }
 
 } // namespace Priority
 
 
-
+/*
 template <PID::TYPE op>
 struct OperatorToken
 {
@@ -90,7 +91,7 @@ struct OperatorToken
       op == PID::XOR?     '^':
       op == PID::EQUAL?   '=': '?';
 };
-
+*/
 
 
 
@@ -115,6 +116,17 @@ public:
    }
 
    virtual void serialize (std::ostream& out) const = 0;
+
+   void  serializeWithBrackets (std::ostream& out, bool use_brackets) const
+   {
+      if (use_brackets)
+      {
+         out << '(';
+         serialize (out);
+         out << ')';
+      }
+      else  serialize(out);
+   }
 };
 
 
@@ -144,6 +156,7 @@ BaseExpression*  makeExpression (double);
 BaseExpression*  makeExpression (const Intval&);
 BaseExpression*  makeExpression (const Accuracy&);
 BaseExpression*  makeExpression (const std::initializer_list<int>&);
+BaseExpression*  makeExpression (std::string);
 
 
 class Expression
@@ -212,7 +225,12 @@ public:
 
    void serialize (std::ostream& out) const
    {
-      expr->serialize (out);
+      expr->serialize(out);
+   }
+
+   bool isInitialized()
+   {
+      return expr.isInitialized();
    }
 
 
@@ -231,7 +249,7 @@ public:
 
 private:
    mgo::Reference <BaseExpression>  expr;
-   Allocator   *alloc;
+   Allocator   *alloc = nullptr;
 };
 
 

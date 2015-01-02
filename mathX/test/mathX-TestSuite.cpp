@@ -4,6 +4,8 @@
 #include "PrimiteTest.h"
 #include "OperatorTest.h"
 #include "ParserTest.h"
+
+#include "VariableTest.h"
 //#include <iostream>
 
 

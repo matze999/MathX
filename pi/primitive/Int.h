@@ -61,11 +61,43 @@ struct double_p: public add_plain_parser <double_p, double>
    }
 };
 
+
+struct number_p: public add_plain_parser <number_p, double>
+{
+   typedef  double  value_type;
+   enum {rank = PID::PRIMITIVE };
+
+   using  add_plain_parser <number_p, double>::parse;
+
+   template <class Scanner, class Collector>
+   bool parse (Scanner &scanner, Collector &collect) const
+   {
+      BACK_TRACE;
+      double value;
+      if (!mgo::readDouble (scanner, value)) 
+         return MatchFailure (scanner);
+
+      if (mgo::isInteger(value))
+         mp::assign (collect, rint(value));
+      else
+         mp::assign (collect, value);
+
+      return MatchSuccess (scanner, "number");
+   }
+
+   void toString (std::ostream &out, WRITEMODE level = WRITEMODE::EXPAND) const
+   {
+      out << "number";
+   }
+};
+
+
 } // namespace _
 
 
 const  BaseParser<_::int_p>  int_;
 const  BaseParser<_::double_p>  double_;
+const  BaseParser<_::number_p>  number;
 
 
 } // namespace pi
